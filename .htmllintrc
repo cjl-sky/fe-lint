@@ -1,0 +1,39 @@
+{
+  "indent-style": "spaces",
+  "indent-width": 4,
+  "title-max-len": false,
+  "id-class-style": "bem",
+  "tag-name-lowercase": true,
+  "attr-name-style": "dash",
+  "attr-quote-style": false,
+  "attr-req-value": false,
+  "id-class-ignore-regex": "{(.*)}",
+  "id-no-dup-ignore-regex": "{(.*)}",
+  "attr-name-ignore-regex": false,
+  "line-end-style": false,
+  "attr-new-line": 10,
+  "label-req-for": true,
+  "tag-self-close": false,
+  "tag-bans": [
+    "acronym",
+    "applet",
+    "b",
+    "basefont",
+    "center",
+    "dir",
+    "font",
+    "isindex",
+    "strike",
+    "tt",
+    "u"
+  ],
+  "attr-bans": [
+    "align",
+    "bgcolor",
+    "border",
+    "longdesc",
+    "marginwidth",
+    "marginheight",
+    "scrolling"
+  ]
+}

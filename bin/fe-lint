@@ -1,0 +1,38 @@
+#!/usr/bin/env node
+const path = require('path');
+const argv = require('yargs').argv;
+const pjson = require(path.join(__dirname, './../package.json'));
+
+// -v 或者 --version 命令返回 fe-check 版本号
+if (argv.v || argv.version) {
+  console.log(pjson.version);
+  process.exit();
+}
+
+const util = require('../util');
+const index = require('../index');
+
+let lintCb = function() {};
+
+if (argv.localdiff) {
+  // 只检测本地 diff 文件
+  util.setGitLocalDiffFileList();
+  process.env.lintConfigFile = 'lint.local.diff.json';
+  process.env.isDiffLint = 'true';
+} else if (argv.commitdiff) {
+  // 只检测上次成功检测时 git 提交和此次检测时最新 git 提交之间变动的文件
+  let lintRes = util.setGitCommitDiffFileList();
+  process.env.lintConfigFile = 'lint.commit.diff.json';
+  process.env.isDiffLint = 'true';
+  // 记录当前检测成功的 commit id
+  lintCb = function() {
+    util.updateLintLog(lintRes);
+    util.deleteUselessLintLog();
+  };
+} else {
+  // 检测所有已配置到 lint.config.json 里的文件
+  process.env.lintConfigFile = 'lint.config.json';
+}
+
+// 运行 lint 任务
+index.runLintTasks(lintCb);
