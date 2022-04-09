@@ -29,7 +29,7 @@
     "gulp-sass-lint": "github:cjl-sky/gulp-sass-lint",
     "lowdb": "^1.0.0",
     "md5": "^2.2.1",
-    "moment": "^2.20.1",
+    "moment": "^2.29.2",
     "yargs": "^8.0.2"
   }
 }
